@@ -87,23 +87,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Exits: ");
-        String exits = "";
-        if(currentRoom.northExit != null) {
-            exits += "north ";
-        }
-        if(currentRoom.eastExit != null) {
-            exits += "east ";
-        }
-        if(currentRoom.southExit != null) {
-            exits += "south ";
-        }
-        if(currentRoom.westExit != null) {
-            exits += "west ";
-        }
-
-        System.out.print(exits);
+        exitsInfo();
         System.out.println();
     }
 
@@ -182,20 +166,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            result += "You are " + currentRoom.getDescription()+"\n";
-            if(currentRoom.northExit != null) {
-                result += "north ";
-            }
-            if(currentRoom.eastExit != null) {
-                result += "east ";
-            }
-            if(currentRoom.southExit != null) {
-                result += "south ";
-            }
-            if(currentRoom.westExit != null) {
-                result += "west ";
-            }
-            return result;
+            result += exitsInfo();
         }
         result += "\n";
 
@@ -222,4 +193,24 @@ public class Game
         game.play();
     }
 
+    private String exitsInfo(){
+        
+        String exits = "";
+        System.out.println("You are " + currentRoom.getDescription());
+        System.out.print("Possible Exits: ");
+        if(currentRoom.northExit != null) {
+            exits += "north ";
+        }
+        if(currentRoom.eastExit != null) {
+            exits += "east ";
+        }
+        if(currentRoom.southExit != null) {
+            exits += "south ";
+        }
+        if(currentRoom.westExit != null) {
+            exits += "west ";
+        }
+        return exits;
+    }
+    
 }
