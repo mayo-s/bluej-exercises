@@ -41,10 +41,10 @@ public class Game
         theatre = new Room("in a lecture theatre");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office.\nthere is a golden magic coffee machine.");
+        office = new Room("in the computing admin office.\nThere is a golden magic coffee machine.");
 
         // initialise room exits
-        outside.setExits("east", theatre);        
+        outside.setExits("east", theatre);
         outside.setExits("west", pub);
         outside.setExits("south", lab);
         theatre.setExits("west", outside);
@@ -115,6 +115,8 @@ public class Game
             result = goRoom(command);
         else if (commandWord.equals("quit"))
             result = quit(command);
+        else if (commandWord.equals("look"))
+            result = look();
 
         return result;
 
@@ -178,7 +180,11 @@ public class Game
             return null;  // signal that we want to quit
         }
     }
-
+    
+    private String look(){
+        return currentRoom.getLongDescription();
+    }
+    
     public static void main(String[] args){
         Game game = new Game();
         game.play();
