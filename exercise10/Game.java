@@ -117,6 +117,8 @@ public class Game
             result = quit(command);
         else if (commandWord.equals("look"))
             result = look();
+        else if (commandWord.equals("eat"))
+            result = eat();
 
         return result;
 
@@ -184,7 +186,11 @@ public class Game
     private String look(){
         return currentRoom.getLongDescription();
     }
-    
+   
+    private String eat(){
+        return "You have eaten now and are not hungry anymore.\n";
+    } 
+   
     public static void main(String[] args){
         Game game = new Game();
         game.play();
