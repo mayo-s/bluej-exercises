@@ -136,7 +136,7 @@ public class Game
         result += "around at the university.\n";
         result += "\n";
         result += "Your command words are:\n";
-        result += "   go quit help\n";
+        result += parser.showCommands() + "\n";
         return result;
     }
 
