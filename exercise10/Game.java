@@ -44,11 +44,14 @@ public class Game
         office = new Room("in the computing admin office.\nthere is a golden magic coffee machine.");
 
         // initialise room exits
-        outside.setExits(null, theatre, lab, pub);
-        theatre.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        outside.setExits("east", theatre);        
+        outside.setExits("west", pub);
+        outside.setExits("south", lab);
+        theatre.setExits("west", outside);
+        pub.setExits("east", outside);
+        lab.setExits("north", outside);
+        lab.setExits("east", office);
+        office.setExits("west", lab);
 
         currentRoom = outside;  // start game outside
     }
@@ -87,7 +90,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        exitsInfo();
+        System.out.println(exitsInfo());
         System.out.println();
     }
 
@@ -147,19 +150,7 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
-        }
-        if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
-        }
-        if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
-        }
-        if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
-        }
+        Room nextRoom = currentRoom.findRoom(direction);
         String result = "";
         if (nextRoom == null) {
             result += "There is no door!";
@@ -197,19 +188,8 @@ public class Game
         
         String exits = "";
         System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Possible Exits: ");
-        if(currentRoom.northExit != null) {
-            exits += "north ";
-        }
-        if(currentRoom.eastExit != null) {
-            exits += "east ";
-        }
-        if(currentRoom.southExit != null) {
-            exits += "south ";
-        }
-        if(currentRoom.westExit != null) {
-            exits += "west ";
-        }
+        System.out.print("Possible Exits: ");        
+        exits += currentRoom.getExits();
         return exits;
     }
     

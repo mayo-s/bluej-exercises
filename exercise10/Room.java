@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -14,11 +16,8 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
+    private String description;
+    private HashMap<String, Room> exits;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,26 +28,15 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        exits = new HashMap<String, Room>();
     }
 
     /**
      * Define the exits of this room.  Every direction either leads
      * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
-    {
-        if(north != null)
-            northExit = north;
-        if(east != null)
-            eastExit = east;
-        if(south != null)
-            southExit = south;
-        if(west != null)
-            westExit = west;
+    public void setExits(String direction, Room neighbor){
+        exits.put(direction, neighbor);
     }
 
     /**
@@ -58,8 +46,26 @@ public class Room
     {
         return description;
     }
+    
+    public String getLongDescription(){
+        return "You are " + description + ".\n" + getExits();
+    }
+    
     /**
      * @return All exits of the room.
      */
+    public String getExits(){
+        String nearexits = "";
+        for(Iterator it = exits.keySet().iterator(); it.hasNext();){
+            nearexits += (String) it.next() + " ";
+        }
+        return nearexits;
+    }
     
+    /**
+     * check if exit is available
+     */    
+    public Room findRoom(String direction){
+        return exits.get(direction);
+    }
 }
