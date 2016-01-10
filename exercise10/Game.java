@@ -119,6 +119,8 @@ public class Game
             result = look();
         else if (commandWord.equals("eat"))
             result = eat();
+        else if (commandWord.equals("scream"))
+            result = scream();
 
         return result;
 
@@ -189,7 +191,11 @@ public class Game
    
     private String eat(){
         return "You have eaten now and are not hungry anymore.\n";
-    } 
+    }
+    
+    private String scream(){
+        return "You screamed as loud as possible but got ignored by everyone.\n";
+    }
    
     public static void main(String[] args){
         Game game = new Game();
