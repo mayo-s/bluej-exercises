@@ -11,13 +11,14 @@ import java.util.*;
  * east, south, west.  For each direction, the room stores a reference
  * to the neighboring room, or null if there is no exit in that direction.
  * 
- * @author  Michael Kolling and David J. Barnes
- * @version 2008.03.30
+ * @author  Michael Kolling and David J. Barnes and Mario Schuetz
+ * @version 2016-01-12
  */
 public class Room 
 {
     private String description;
     private HashMap<String, Room> exits;
+    private HashMap<String, Item> items;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,16 +30,20 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        items = new HashMap<String, Item>();
     }
 
     /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
+     * Define the exits of this room. 
      */
     public void setExits(String direction, Room neighbor){
         exits.put(direction, neighbor);
     }
 
+    public void setItems(String itemName, Item item){
+        items.put(itemName, item);
+    }
+    
     /**
      * @return The description of the room.
      */
@@ -48,7 +53,7 @@ public class Room
     }
     
     public String getLongDescription(){
-        return "You are " + description + ".\n" + "Your possible exits are " + getExits() + "\n";
+        return "You are " + description + ".\n" + "You can see the following items laying around " + getItems() + "\n" + "Your possible exits are " + getExits() + "\n";
     }
     
     /**
@@ -60,6 +65,18 @@ public class Room
             nearexits += (String) it.next() + " ";
         }
         return nearexits;
+    }
+    
+    
+    /**
+     * @return All exits of the room.
+     */
+    public String getItems(){
+        String roomItems = "";
+        for(Iterator it = items.keySet().iterator(); it.hasNext();){
+             roomItems += (String) it.next() + " ";
+        }
+        return roomItems;
     }
     
     /**

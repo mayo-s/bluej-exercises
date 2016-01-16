@@ -11,14 +11,16 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kolling and David J. Barnes
- * @version 2008.03.30
+ * @author  Michael Kolling and David J. Barnes and Mario Schuetz
+ * @version 2016-01-11
  */
 
 public class Game 
 {
     private Parser parser;
     private Room currentRoom;
+    private Room lastRoom;
+    private Room item;
 
     /**
      * Create the game and initialise its internal map.
@@ -34,7 +36,8 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
+        Room outside, theatre, pub, lab, office;        
+        Item beer, flute, drum, drugs, bread, apple, wine, coffee, stone, rock, orange;
 
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -43,6 +46,19 @@ public class Game
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office.\nThere is a golden magic coffee machine.");
 
+        // create the items
+        apple = new Item("a delicious red apple.");
+        beer = new Item("a refreshing beer.");
+        flute = new Item("a handcrafted flute.");
+        drum = new Item("a funny looking.");
+        drugs = new Item("some bad stuff (drugs).");
+        bread = new Item("a delicious fresh bread.");
+        wine = new Item("a red wine.");
+        coffee = new Item("a dark reviving coffee.");
+        stone = new Item("a small stone.");
+        rock = new Item("a heavy rock.");
+        orange = new Item("a juicy, orange orange.");
+        
         // initialise room exits
         outside.setExits("east", theatre);
         outside.setExits("west", pub);
@@ -52,9 +68,27 @@ public class Game
         lab.setExits("north", outside);
         lab.setExits("east", office);
         office.setExits("west", lab);
-
+        
+        //initialise room items
+        outside.setItems("apple", apple);
+        outside.setItems("orange", orange);
+        outside.setItems("stone", stone);
+        outside.setItems("rock", rock);
+        pub.setItems("bread", bread);
+        pub.setItems("beer", beer);
+        pub.setItems("wine", wine);
+        theatre.setItems("flute", flute);
+        theatre.setItems("drum", drum);
+        lab.setItems("drugs", drugs);
+        office.setItems("coffee", coffee);
+                
+        lastRoom = null; //remember last room to go back
         currentRoom = outside;  // start game outside
     }
+    
+//     private void createItems(){
+//         
+//     }
 
     /**
      *  Main play routine.  Loops until end of play.
@@ -75,7 +109,6 @@ public class Game
             { 
                 System.out.println(output);
             }
-
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -90,7 +123,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(exitsInfo());
+        System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
 
@@ -121,6 +154,8 @@ public class Game
             result = eat();
         else if (commandWord.equals("scream"))
             result = scream();
+        else if(commandWord.equals("back"))
+            result = back();
 
         return result;
 
@@ -162,8 +197,9 @@ public class Game
             result += "There is no door!";
         }
         else {
+            lastRoom = currentRoom;
             currentRoom = nextRoom;
-            result += exitsInfo();
+            result += currentRoom.getLongDescription();
         }
         result += "\n";
 
@@ -195,6 +231,17 @@ public class Game
     
     private String scream(){
         return "You screamed as loud as possible but got ignored by everyone.\n";
+    }
+    
+    private String back(){
+        if(lastRoom == null)
+            return "I don't remember where i came from.";
+        else{
+            currentRoom = lastRoom;
+            lastRoom = null;
+            return exitsInfo();
+        }
+            
     }
    
     public static void main(String[] args){
