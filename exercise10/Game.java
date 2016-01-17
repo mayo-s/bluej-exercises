@@ -38,7 +38,6 @@ public class Game
     private void createRooms()
     {
         Room outside, theatre, pub, lab, office;        
-        Item beer, flute, drum, drugs, bread, apple, wine, coffee, stone, rock, orange;
 
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -46,19 +45,6 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office.\nThere is a golden magic coffee machine.");
-
-        // create the items
-        apple = new Item("a delicious red apple.",1);
-        beer = new Item("a refreshing beer.",1);
-        flute = new Item("a handcrafted flute.",2);
-        drum = new Item("a funny looking drum.",2);
-        drugs = new Item("some bad stuff (drugs).",0);
-        bread = new Item("a delicious fresh bread.",2);
-        wine = new Item("a red wine.",2);
-        coffee = new Item("a dark reviving coffee.",1);
-        stone = new Item("a small stone.",3);
-        rock = new Item("a heavy rock.",5);
-        orange = new Item("a juicy, orange orange.",1);
         
         // initialise room exits
         outside.setExits("east", theatre);
@@ -70,7 +56,29 @@ public class Game
         lab.setExits("east", office);
         office.setExits("west", lab);
         
-        //initialise room items
+        createItems(outside, theatre, pub, lab, office);
+              
+        lastRoom = null; //remember last room to go back
+        currentRoom = outside;  // start game outside
+    }
+    
+    private void createItems(Room outside, Room theatre, Room pub, Room lab, Room office){
+       Item beer, flute, drum, drugs, bread, apple, wine, coffee, stone, rock, orange;
+       
+       // create the items
+        apple = new Item("a delicious red apple.",1);
+        beer = new Item("a refreshing beer.",1);
+        flute = new Item("a handcrafted flute.",2);
+        drum = new Item("a funny looking drum.",2);
+        drugs = new Item("some bad stuff (drugs).",0);
+        bread = new Item("a delicious fresh bread.",2);
+        wine = new Item("a red wine.",2);
+        coffee = new Item("a dark reviving coffee.",1);
+        stone = new Item("a small stone.",3);
+        rock = new Item("a heavy rock.",5);
+        orange = new Item("a juicy, orange orange.",1);
+       
+       //initialise room items
         outside.setItems("apple", apple);
         outside.setItems("orange", orange);
         outside.setItems("stone", stone);
@@ -82,14 +90,7 @@ public class Game
         theatre.setItems("drum", drum);
         lab.setItems("drugs", drugs);
         office.setItems("coffee", coffee);
-                
-        lastRoom = null; //remember last room to go back
-        currentRoom = outside;  // start game outside
     }
-    
-//     private void createItems(){
-//         
-//     }
 
     /**
      *  Main play routine.  Loops until end of play.
