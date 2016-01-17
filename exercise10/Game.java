@@ -33,6 +33,7 @@ public class Game
 
     /**
      * Create all the rooms and link their exits together.
+     * also adding items to the rooms.
      */
     private void createRooms()
     {
@@ -47,17 +48,17 @@ public class Game
         office = new Room("in the computing admin office.\nThere is a golden magic coffee machine.");
 
         // create the items
-        apple = new Item("a delicious red apple.");
-        beer = new Item("a refreshing beer.");
-        flute = new Item("a handcrafted flute.");
-        drum = new Item("a funny looking.");
-        drugs = new Item("some bad stuff (drugs).");
-        bread = new Item("a delicious fresh bread.");
-        wine = new Item("a red wine.");
-        coffee = new Item("a dark reviving coffee.");
-        stone = new Item("a small stone.");
-        rock = new Item("a heavy rock.");
-        orange = new Item("a juicy, orange orange.");
+        apple = new Item("a delicious red apple.",1);
+        beer = new Item("a refreshing beer.",1);
+        flute = new Item("a handcrafted flute.",2);
+        drum = new Item("a funny looking drum.",2);
+        drugs = new Item("some bad stuff (drugs).",0);
+        bread = new Item("a delicious fresh bread.",2);
+        wine = new Item("a red wine.",2);
+        coffee = new Item("a dark reviving coffee.",1);
+        stone = new Item("a small stone.",3);
+        rock = new Item("a heavy rock.",5);
+        orange = new Item("a juicy, orange orange.",1);
         
         // initialise room exits
         outside.setExits("east", theatre);
@@ -250,7 +251,6 @@ public class Game
     }
 
     private String exitsInfo(){
-        
         String exits = "";
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Possible Exits: ");        

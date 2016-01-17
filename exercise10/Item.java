@@ -14,7 +14,7 @@ public class Item
     /**
      * Constructor for objects of class Item
      */
-    public Item(String description){
+    public Item(String description, int weight){
         this.description = description;
         this.weight = weight;
     }
