@@ -157,7 +157,7 @@ public class Game
         else if (commandWord.equals("scream"))
             result = scream();
         else if(commandWord.equals("back"))
-            result = back();
+            result = back(command);
 
         return result;
 
@@ -235,7 +235,12 @@ public class Game
         return "You screamed as loud as possible but got ignored by everyone.\n";
     }
     
-    private String back(){
+    private String back(Command command){
+        if(command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            return "What? There is only one way to go back.";
+        }
+        
         if(lastRoom == null)
             return "I don't remember where i came from.";
         else{
