@@ -185,8 +185,8 @@ public class GameSystemTest
     public void showItems(){
         String result = game.processCommand(parser.getCommand("look"));
         assertTrue(result.contains("apple"));
-        assertTrue(result.contains("beer"));
-        assertTrue(result.contains("flute"));
+        assertTrue(result.contains("orange"));
+        assertTrue(result.contains("rock"));
     }
     
 }
