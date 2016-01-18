@@ -160,7 +160,38 @@ public class GameSystemTest
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));
     }
+    
+    @Test
+    public void testBack(){
+//         //given
+//         game.processCommand(parser.getCommand("go east"));
+//         //when
+//         String output = game.processCommand(parser.getCommand("back"));
+//         //then
+//         assertEquals("should go back outside.", output.contains("outside")); 
+        
+         //given
+        Command command = parser.getCommand("go east");
+        game.processCommand(command);
+        command = parser.getCommand("back");
+        game.processCommand(command);
+        //when
+        String output = game.processCommand(command);
+        //then
+        assertEquals(true, output.contains("outside"));
+    }
+
+    @Test 
+    public void showItems(){
+        String result = game.processCommand(parser.getCommand("look"));
+        assertTrue(result.contains("apple"));
+        assertTrue(result.contains("beer"));
+        assertTrue(result.contains("flute"));
+    }
+    
 }
+
+
 
 
 

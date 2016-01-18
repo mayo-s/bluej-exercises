@@ -151,11 +151,11 @@ public class Game
         else if (commandWord.equals("quit"))
             result = quit(command);
         else if (commandWord.equals("look"))
-            result = look();
+            result = look(command);
         else if (commandWord.equals("eat"))
-            result = eat();
+            result = eat(command);
         else if (commandWord.equals("scream"))
-            result = scream();
+            result = scream(command);
         else if(commandWord.equals("back"))
             result = back(command);
 
@@ -223,16 +223,31 @@ public class Game
         }
     }
     
-    private String look(){
-        return currentRoom.getLongDescription();
+    private String look(Command command){
+        if(command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            return "Try again!";
+        }
+        else
+            return currentRoom.getLongDescription();
     }
    
-    private String eat(){
-        return "You have eaten now and are not hungry anymore.\n";
+    private String eat(Command command){
+        if(command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            return "You better don't.";
+        }
+        else
+            return "You have eaten now and are not hungry anymore.\n";
     }
     
-    private String scream(){
-        return "You screamed as loud as possible but got ignored by everyone.\n";
+    private String scream(Command command){
+        if(command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            return "Try again!";
+        }
+        else
+            return "You screamed as loud as possible but got ignored by everyone.\n";
     }
     
     private String back(Command command){
