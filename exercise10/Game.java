@@ -158,6 +158,8 @@ public class Game
             result = scream(command);
         else if(commandWord.equals("back"))
             result = back(command);
+        else if(commandWord.equals("check"))
+            result = checkItem(command);
 
         return result;
 
@@ -241,6 +243,28 @@ public class Game
             return "You have eaten now and are not hungry anymore.\n";
     }
     
+    private String checkItem(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            return "Check what?\n";
+        }
+
+        String itemToCheck = command.getSecondWord();
+
+        String result = "";
+        if (itemToCheck == null) {
+            result += "Which item do you want to check?";
+        }
+        else {
+            result += "You are looking at " + currentRoom.getItemDescription(itemToCheck);
+            result += " It weights " + currentRoom.getItemWeight(itemToCheck);
+        }
+        result += "\n";
+
+        return result;
+    }
+    
     private String scream(Command command){
         if(command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
@@ -253,7 +277,7 @@ public class Game
     private String back(Command command){
         if(command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            return "What? There is only one way to go back.";
+            return "What? There is only one way to go back.\n";
         }
         
         if(lastRoom == null)

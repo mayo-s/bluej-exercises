@@ -53,9 +53,9 @@ public class Room
     }
     
     public String getLongDescription(){
-        return "You are " + description + ".\n" + "You can see the following items laying around " + getItems() + "\n" + "Your possible exits are " + getExits() + "\n";
+        return "You are " + description + ".\n" + "You can see the following items laying around " + getItems() + "\n" + "Your possible exits are " + getExits();
     }
-    
+        
     /**
      * @return All exits of the room.
      */
@@ -77,6 +77,18 @@ public class Room
              roomItems += (String) it.next() + " ";
         }
         return roomItems;
+    }
+    
+    public String getItemDescription(String itemToCheck){
+        String description = items.get(itemToCheck).getDescription();
+        
+        return description;
+    }
+        
+    public int getItemWeight(String itemToCheck){
+        int weight = items.get(itemToCheck).getWeight();
+        
+        return weight;
     }
     
     /**

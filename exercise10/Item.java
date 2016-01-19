@@ -23,4 +23,7 @@ public class Item
         return description;
     }
 
+    public int getWeight(){
+        return weight;
+    }
 }
