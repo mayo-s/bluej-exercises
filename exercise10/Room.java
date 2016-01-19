@@ -80,15 +80,22 @@ public class Room
     }
     
     public String getItemDescription(String itemToCheck){
-        String description = items.get(itemToCheck).getDescription();
         
-        return description;
+        if(items.containsKey(itemToCheck)){
+            String description = "You are looking at " + items.get(itemToCheck).getDescription();
+            return description;
+        }
+        else
+            return "This object does not exist in this room.";
     }
         
     public int getItemWeight(String itemToCheck){
-        int weight = items.get(itemToCheck).getWeight();
-        
-        return weight;
+        if(items.containsKey(itemToCheck)){
+            int weight = items.get(itemToCheck).getWeight();        
+            return weight;
+        }
+        else
+            return 0;
     }
     
     /**

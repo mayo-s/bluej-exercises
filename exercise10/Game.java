@@ -257,7 +257,7 @@ public class Game
             result += "Which item do you want to check?";
         }
         else {
-            result += "You are looking at " + currentRoom.getItemDescription(itemToCheck);
+            result += currentRoom.getItemDescription(itemToCheck);
             result += " It weights " + currentRoom.getItemWeight(itemToCheck);
         }
         result += "\n";
