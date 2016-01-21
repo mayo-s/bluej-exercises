@@ -281,7 +281,7 @@ public class Game
         }
         
         if(lastRoom == null)
-            return "I don't remember where i came from.";
+            return "I don't remember where i came from.\n";
         else{
             currentRoom = lastRoom;
             lastRoom = null;
