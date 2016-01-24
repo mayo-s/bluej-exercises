@@ -12,7 +12,7 @@ import java.util.*;
  * to the neighboring room, or null if there is no exit in that direction.
  * 
  * @author  Michael Kolling and David J. Barnes and Mario Schuetz
- * @version 2016-01-12
+ * @version 2016-01-24
  */
 public class Room 
 {
@@ -40,8 +40,18 @@ public class Room
         exits.put(direction, neighbor);
     }
 
+    /**
+     * setup Items in the room
+     */
     public void setItems(String itemName, Item item){
         items.put(itemName, item);
+    }
+    
+    /**
+     * remove items from room when picked up
+     */
+    public void removeItem(String itemName){
+        items.remove(itemName);
     }
     
     /**
@@ -52,8 +62,12 @@ public class Room
         return description;
     }
     
+    /**
+     * gives long desscription of what to see in the room
+     * @return all exits and items of/in the room
+     */
     public String getLongDescription(){
-        return "You are " + description + ".\n" + "You can see the following items laying around " + getItems() + "\n" + "Your possible exits are " + getExits();
+        return "You are " + description + ".\n" + "You can see the following items laying around " + getItems() + "\n" + "Your possible exits are " + getExits()  + "\n";
     }
         
     /**
@@ -69,7 +83,7 @@ public class Room
     
     
     /**
-     * @return All exits of the room.
+     * @return All items in the room.
      */
     public String getItems(){
         String roomItems = "";
@@ -79,6 +93,9 @@ public class Room
         return roomItems;
     }
     
+    /**
+     * @return a description of an item
+     */
     public String getItemDescription(String itemToCheck){
         
         if(items.containsKey(itemToCheck)){
@@ -89,6 +106,9 @@ public class Room
             return "This object does not exist in this room.";
     }
         
+    /**
+     * @return the weight of an item
+     */
     public int getItemWeight(String itemToCheck){
         if(items.containsKey(itemToCheck)){
             int weight = items.get(itemToCheck).getWeight();        

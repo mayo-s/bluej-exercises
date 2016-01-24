@@ -12,7 +12,7 @@
  *  executes the commands that the parser returns.
  * 
  * @author  Michael Kolling and David J. Barnes and Mario Schuetz
- * @version 2016-01-11
+ * @version 2016-01-24
  */
 
 public class Game 
@@ -21,7 +21,7 @@ public class Game
     private Room currentRoom;
     private Room lastRoom;
     private Room item;
-    private Player player;
+    private Player backpack;
 
     /**
      * Create the game and initialise its internal map.
@@ -127,7 +127,6 @@ public class Game
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
-        System.out.println();
     }
 
     /**
@@ -300,13 +299,16 @@ public class Game
         if(!command.hasSecondWord()) {
             return "Take what?";
         }
-        else
-            
+        else{
             result += "You added ";
             result += currentRoom.getItemDescription(itemToStore);
             result += " to your storage.\n";
+                       
+            //player.addToStorage(itemToStore, );           
+            currentRoom.removeItem(itemToStore); 
             
             return result;
+        }
     }    
     
     private String dropItem(Command command){
@@ -315,12 +317,17 @@ public class Game
         if(!command.hasSecondWord()) {
             return "Drop what?";
         }
-        else
+        else if(itemToDrop == "all"){
+            backpack.clearStorage();
+            return "You emptied your backpack.";
+        }
+        else{
             result += "You removed ";
             result += currentRoom.getItemDescription(itemToDrop);
             result += " from your storage.\n";
             
             return result;
+        }
     }
    
     public static void main(String[] args){
@@ -328,6 +335,9 @@ public class Game
         game.play();
     }
 
+    /**
+     * @return print all possible exits in room
+     */
     private String exitsInfo(){
         String exits = "";
         System.out.println("You are " + currentRoom.getDescription());

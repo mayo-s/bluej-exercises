@@ -3,7 +3,7 @@ import java.util.*;
  * determine player skills
  * 
  * @author (Mario Schuetz) 
- * @version (2016-01-21)
+ * @version (2016-01-24)
  */
 public class Player
 {
@@ -28,4 +28,16 @@ public class Player
     public void clearStorage(){
         storage.clear();
     }
+    
+//     public int maxWeight(Item itemToTake){
+//         int sumWeight = 0;
+//         
+//         for(Iterator it = storage.keySet().iterator(); it.hasNext();){
+//             sumWeight += storage.it.next().getWeight();
+//         }
+//         
+//         sumWeight += itemToTake.getWeight();
+//         
+//         return sumWeight;
+//     }
 }
