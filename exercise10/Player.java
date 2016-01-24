@@ -29,6 +29,23 @@ public class Player
         storage.clear();
     }
     
+    /**
+     * @return single item
+     */
+    public Item getItem(String itemToDrop){
+        return storage.get(itemToDrop);
+    }
+    
+    /**
+     * @return all items in backpack
+     */
+    public String getItems(){
+        String backpackItems = "";
+        for(Iterator it = storage.keySet().iterator(); it.hasNext();){
+             backpackItems += (String) it.next() + " ";
+        }
+        return backpackItems;
+    }
 //     public int maxWeight(Item itemToTake){
 //         int sumWeight = 0;
 //         

@@ -209,7 +209,7 @@ public class Game
             currentRoom = nextRoom;
             result += currentRoom.getLongDescription();
         }
-        result += "\n";
+        //result += "\n";
 
         return result;
     }
@@ -259,6 +259,8 @@ public class Game
         if (itemToCheck == null) {
             result += "Which item do you want to check?";
         }
+        else if(itemToCheck == "backpack")
+            return "Your backpack currently holds " + backpack.getItems();
         else {
             result += currentRoom.getItemDescription(itemToCheck);
             result += " It weights " + currentRoom.getItemWeight(itemToCheck);
@@ -304,7 +306,7 @@ public class Game
             result += currentRoom.getItemDescription(itemToStore);
             result += " to your storage.\n";
                        
-            //player.addToStorage(itemToStore, );           
+            backpack.addToStorage(itemToStore, currentRoom.getItem(itemToStore));           
             currentRoom.removeItem(itemToStore); 
             
             return result;

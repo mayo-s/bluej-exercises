@@ -48,6 +48,24 @@ public class Room
     }
     
     /**
+     * @return a String of all items in the room.
+     */
+    public String getItems(){
+        String roomItems = "";
+        for(Iterator it = items.keySet().iterator(); it.hasNext();){
+             roomItems += (String) it.next() + " ";
+        }
+        return roomItems;
+    }
+    
+    /**
+     * @return single item
+     */
+    public Item getItem(String itemToTake){
+        return items.get(itemToTake);
+    }
+    
+    /**
      * remove items from room when picked up
      */
     public void removeItem(String itemName){
@@ -79,18 +97,6 @@ public class Room
             nearexits += (String) it.next() + " ";
         }
         return nearexits;
-    }
-    
-    
-    /**
-     * @return All items in the room.
-     */
-    public String getItems(){
-        String roomItems = "";
-        for(Iterator it = items.keySet().iterator(); it.hasNext();){
-             roomItems += (String) it.next() + " ";
-        }
-        return roomItems;
     }
     
     /**
