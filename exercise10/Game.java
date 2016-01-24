@@ -298,10 +298,10 @@ public class Game
         String itemToStore = command.getSecondWord();
         String result = "";
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
             return "Take what?";
         }
         else
+            
             result += "You added ";
             result += currentRoom.getItemDescription(itemToStore);
             result += " to your storage.\n";
@@ -313,7 +313,6 @@ public class Game
         String itemToDrop = command.getSecondWord();
         String result = "";
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
             return "Drop what?";
         }
         else
