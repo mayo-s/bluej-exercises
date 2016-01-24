@@ -82,7 +82,7 @@ public class Room
     public String getItemDescription(String itemToCheck){
         
         if(items.containsKey(itemToCheck)){
-            String description = "You are looking at " + items.get(itemToCheck).getDescription();
+            String description = items.get(itemToCheck).getDescription();
             return description;
         }
         else

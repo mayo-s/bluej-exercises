@@ -21,6 +21,7 @@ public class Game
     private Room currentRoom;
     private Room lastRoom;
     private Room item;
+    private Player player;
 
     /**
      * Create the game and initialise its internal map.
@@ -66,17 +67,17 @@ public class Game
        Item beer, flute, drum, drugs, bread, apple, wine, coffee, stone, rock, orange;
        
        // create the items
-        apple = new Item("a delicious red apple.",1);
-        beer = new Item("a refreshing beer.",1);
-        flute = new Item("a handcrafted flute.",2);
-        drum = new Item("a funny looking drum.",2);
-        drugs = new Item("some bad stuff (drugs).",0);
-        bread = new Item("a delicious fresh bread.",2);
-        wine = new Item("a red wine.",2);
-        coffee = new Item("a dark reviving coffee.",1);
-        stone = new Item("a small stone.",3);
-        rock = new Item("a heavy rock.",5);
-        orange = new Item("a juicy, orange orange.",1);
+        apple = new Item("a delicious red apple",1);
+        beer = new Item("a refreshing beer",1);
+        flute = new Item("a handcrafted flute",2);
+        drum = new Item("a funny looking drum",2);
+        drugs = new Item("some bad stuff (drugs)",0);
+        bread = new Item("a delicious fresh bread",2);
+        wine = new Item("a red wine",2);
+        coffee = new Item("a dark reviving coffee",1);
+        stone = new Item("a small stone",3);
+        rock = new Item("a heavy rock",5);
+        orange = new Item("a juicy, orange orange",1);
        
        //initialise room items
         outside.setItems("apple", apple);
@@ -160,6 +161,10 @@ public class Game
             result = back(command);
         else if(commandWord.equals("check"))
             result = checkItem(command);
+        else if(commandWord.equals("take"))
+            result = takeItem(command);
+        else if(commandWord.equals("drop"))
+            result = dropItem(command);
 
         return result;
 
@@ -251,7 +256,6 @@ public class Game
         }
 
         String itemToCheck = command.getSecondWord();
-
         String result = "";
         if (itemToCheck == null) {
             result += "Which item do you want to check?";
@@ -288,6 +292,36 @@ public class Game
             return exitsInfo();
         }
             
+    }
+    
+    private String takeItem(Command command){
+        String itemToStore = command.getSecondWord();
+        String result = "";
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            return "Take what?";
+        }
+        else
+            result += "You added ";
+            result += currentRoom.getItemDescription(itemToStore);
+            result += " to your storage.\n";
+            
+            return result;
+    }    
+    
+    private String dropItem(Command command){
+        String itemToDrop = command.getSecondWord();
+        String result = "";
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            return "Drop what?";
+        }
+        else
+            result += "You removed ";
+            result += currentRoom.getItemDescription(itemToDrop);
+            result += " from your storage.\n";
+            
+            return result;
     }
    
     public static void main(String[] args){
