@@ -298,7 +298,7 @@ public class Game
     private String takeItem(Command command){
         String itemToStore = command.getSecondWord();
         String result = "";
-        Item input = currentRoom.getItem(command);
+        Item input = currentRoom.getItem(itemToStore);
 
         if(!command.hasSecondWord()) {
             return "Take what?\n";
@@ -311,7 +311,7 @@ public class Game
         if (you.canBePickedUp(input))
         {
             you.addToBag(input);
-            currentRoom.removeItem(input);
+            currentRoom.removeItem(itemToStore);
             return "You added the item "+ input.getName() + " to your backpack.\n";   
         }
         return "Your backpack is already full\n";   
