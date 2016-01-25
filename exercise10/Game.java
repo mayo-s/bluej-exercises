@@ -80,17 +80,17 @@ public class Game
         orange = new Item("orange", "a juicy, orange orange",1);
        
        //initialise room items
-        outside.setItems("apple", apple);
-        outside.setItems("orange", orange);
-        outside.setItems("stone", stone);
-        outside.setItems("rock", rock);
-        pub.setItems("bread", bread);
-        pub.setItems("beer", beer);
-        pub.setItems("wine", wine);
-        theatre.setItems("flute", flute);
-        theatre.setItems("drum", drum);
-        lab.setItems("drugs", drugs);
-        office.setItems("coffee", coffee);
+        outside.setItem(apple);
+        outside.setItem(orange);
+        outside.setItem(stone);
+        outside.setItem(rock);
+        pub.setItem(bread);
+        pub.setItem(beer);
+        pub.setItem(wine);
+        theatre.setItem(flute);
+        theatre.setItem(drum);
+        lab.setItem(drugs);
+        office.setItem(coffee);
     }
 
     /**
@@ -260,7 +260,7 @@ public class Game
             result += "Which item do you want to check?";
         }
         else if(itemToCheck == "backpack")
-            return "Your backpack currently holds " + you.getItems();
+            return "Your backpack currently holds " + you.getBag();
         else {
             result += currentRoom.getItemDescription(itemToCheck);
             result += " It weights " + currentRoom.getItemWeight(itemToCheck);
@@ -305,10 +305,8 @@ public class Game
             result += "You added ";
             result += currentRoom.getItemDescription(itemToStore);
             result += " to your storage.\n";
-                       
-            //you.addToStorage(itemToStore, currentRoom.getItem(itemToStore));
-            you.addToStorage(itemToStore, 
-            currentRoom.removeItem(itemToStore); 
+            
+            you.addToBag(currentRoom.getItem(itemToStore));
             
             return result;
         }
@@ -319,10 +317,6 @@ public class Game
         String result = "";
         if(!command.hasSecondWord()) {
             return "Drop what?";
-        }
-        else if(itemToDrop == "all"){
-            you.clearStorage();
-            return "You emptied your backpack.";
         }
         else{
             result += "You removed ";

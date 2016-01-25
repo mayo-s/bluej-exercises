@@ -67,13 +67,18 @@ public class Room
                 return item;
             }
         }
+        return null;
     }
     
     /**
      * remove items from room when picked up
      */
     public void removeItem(String itemName){
-        items.remove(itemName);
+        for (Item item : items){
+            if (item.getName().equals(itemName)){
+                items.remove(item);
+            }
+        }
     }
     
     /**
@@ -108,25 +113,25 @@ public class Room
      */
     public String getItemDescription(String itemToCheck){
         
-        for(
-        if(items.contains(itemToCheck)){
-            String description = items.get(itemToCheck).getDescription();
-            return description;
-        }
-        else
-            return "This object does not exist in this room.";
-    }
+        for(Item item : items){
+	        if(item. getDescription().equals(itemToCheck)){
+	            return item.getDescription();
+	        }	            
+	    }
+	    return "The object does not exist in this room.";
+	}
         
     /**
      * @return the weight of an item
      */
     public int getItemWeight(String itemToCheck){
-        if(items.containsKey(itemToCheck)){
-            int weight = items.get(itemToCheck).getWeight();        
-            return weight;
-        }
-        else
-            return 0;
+        
+        for(Item item : items){
+	        if(item. getDescription().equals(itemToCheck)){
+	            return item.getWeight();
+	        }
+	    }
+	    return 0;
     }
     
     /**

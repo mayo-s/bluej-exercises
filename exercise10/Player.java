@@ -44,7 +44,7 @@ public class Player
     {
         String itemsInBag = "";
         for (Item item : itemBag) {  
-            itemsInBag += item.getNameString() + " ";
+            itemsInBag += item.getName() + " ";
         }
         return itemsInBag;
     }
@@ -52,7 +52,7 @@ public class Player
     public Item getItemFromBag(Command command)
     {
         for (Item item : itemBag) {  
-            if(item.getNameString().equals(command.getSecondWord())){
+            if(item.getName().equals(command.getSecondWord())){
                 return item;
             }
         }
