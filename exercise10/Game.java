@@ -21,7 +21,7 @@ public class Game
     private Room currentRoom;
     private Room lastRoom;
     private Room item;
-    private Player backpack;
+    private Player you;
 
     /**
      * Create the game and initialise its internal map.
@@ -67,17 +67,17 @@ public class Game
        Item beer, flute, drum, drugs, bread, apple, wine, coffee, stone, rock, orange;
        
        // create the items
-        apple = new Item("a delicious red apple",1);
-        beer = new Item("a refreshing beer",1);
-        flute = new Item("a handcrafted flute",2);
-        drum = new Item("a funny looking drum",2);
-        drugs = new Item("some bad stuff (drugs)",0);
-        bread = new Item("a delicious fresh bread",2);
-        wine = new Item("a red wine",2);
-        coffee = new Item("a dark reviving coffee",1);
-        stone = new Item("a small stone",3);
-        rock = new Item("a heavy rock",5);
-        orange = new Item("a juicy, orange orange",1);
+        apple = new Item("apple", "a delicious red apple",1);
+        beer = new Item("beer", "a refreshing beer",1);
+        flute = new Item("flute", "a handcrafted flute",2);
+        drum = new Item("drum", "a funny looking drum",2);
+        drugs = new Item("drugs", "some bad stuff (drugs)",0);
+        bread = new Item("bread", "a delicious fresh bread",2);
+        wine = new Item("wine", "a red wine",2);
+        coffee = new Item("coffee", "a dark reviving coffee",1);
+        stone = new Item("stone", "a small stone",3);
+        rock = new Item("rock", "a heavy rock",5);
+        orange = new Item("orange", "a juicy, orange orange",1);
        
        //initialise room items
         outside.setItems("apple", apple);
@@ -260,7 +260,7 @@ public class Game
             result += "Which item do you want to check?";
         }
         else if(itemToCheck == "backpack")
-            return "Your backpack currently holds " + backpack.getItems();
+            return "Your backpack currently holds " + you.getItems();
         else {
             result += currentRoom.getItemDescription(itemToCheck);
             result += " It weights " + currentRoom.getItemWeight(itemToCheck);
@@ -306,7 +306,8 @@ public class Game
             result += currentRoom.getItemDescription(itemToStore);
             result += " to your storage.\n";
                        
-            backpack.addToStorage(itemToStore, currentRoom.getItem(itemToStore));           
+            //you.addToStorage(itemToStore, currentRoom.getItem(itemToStore));
+            you.addToStorage(itemToStore, 
             currentRoom.removeItem(itemToStore); 
             
             return result;
@@ -320,7 +321,7 @@ public class Game
             return "Drop what?";
         }
         else if(itemToDrop == "all"){
-            backpack.clearStorage();
+            you.clearStorage();
             return "You emptied your backpack.";
         }
         else{
