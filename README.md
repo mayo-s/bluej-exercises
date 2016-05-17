@@ -1,5 +1,4 @@
 # bluej-exercises
-Objects First With Java - BlueJ Exercises
+International Media and Computing, 1st semester at HTW BERLIN (WiSe15/16)
 
-These are some first semester Java-Exercises from Media and Computing at HTW Berlin.
-
+Based on the Book "Objects First With Java - BlueJ Exercises"
